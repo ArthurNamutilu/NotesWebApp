@@ -3,9 +3,10 @@ from os import path
 from .views import views
 from .auth import auth
 from flask_sqlalchemy import SQLAlchemy
+from .db import db
 
-db = SQLAlchemy()
-DB_NAME = "database.db"
+# db = SQLAlchemy()
+DB_NAME = "store.db"
 
 
 def create_app():  # application factory - func creates a Flask app instance
