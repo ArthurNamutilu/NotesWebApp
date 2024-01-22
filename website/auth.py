@@ -14,8 +14,19 @@ def logout():
 
 @auth.route('/log-in', methods=['GET', 'POST'])
 def login():
-    data = request.form
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
 
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.password, password):
+                flash('Loged in succesfully!', category='success')
+                return render_template('home.html')
+            else:
+                flash('Incorrect password!', category='error')
+        else:
+            flash('Email does not exist', category='error')
     return render_template("log_in.html")
 
 
